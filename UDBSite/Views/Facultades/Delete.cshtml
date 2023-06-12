@@ -1,0 +1,21 @@
+﻿@model UDBSite.Models.Facultad
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>¿Está seguro de eliminar este registro?</h3>
+@Html.Partial("_details")
+<div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-default" })
+    </div>
+}
+</div>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<UDBSite.Models.Carrera>
+@{
+    ViewBag.Title = "Carreras";
+}
+<h2>@ViewBag.Title.</h2>
+
+<h3>@ViewBag.Message.</h3>
+<div class="row">
+    @foreach (var carrera in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>@carrera.Nombre</h3>
+                    <p>@carrera.Descripcion</p>
+                    <p><a href="#" class="btn btn-xs btn-default" role="button">Facultad: @carrera.Facultad.Nombre</a></p>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+

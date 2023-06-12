@@ -1,0 +1,33 @@
+﻿@model UDBSite.Models.Carrera
+
+
+<div>
+    <h4>Carrera</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Facultad.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Facultad.Nombre)
+        </dd>
+
+    </dl>
+</div>

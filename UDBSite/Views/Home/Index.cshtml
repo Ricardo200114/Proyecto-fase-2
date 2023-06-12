@@ -1,0 +1,28 @@
+﻿@model UDBSite.Models.Institucion
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>@Model.Nombre</h1>
+    <p class="lead">@Model.Descripcion.</p>
+    <p><iframe  class="center-block" width="600" height="400"
+        src="@Model.URLVideo">
+</iframe></p>
+</div>
+<h1>Noticias</h1>
+<div class="row">
+    @foreach (var noticia in (List<UDBSite.Models.Noticia>)ViewBag.Noticias)
+    {
+    <div class="col-md-4">
+        <h2>@noticia.Titulo</h2>
+        <p>
+            @noticia.Descripcion
+        </p>
+        <p>
+            @Html.ActionLink("Leer más..", "Leer", "Noticias", new {id = noticia.Id}, new { @class = "btn btn-default" })
+        </p>
+    </div>
+    }
+    
+</div>

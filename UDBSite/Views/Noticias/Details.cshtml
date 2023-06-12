@@ -1,0 +1,12 @@
+﻿@model UDBSite.Models.Noticia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+@Html.Partial("_details")
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

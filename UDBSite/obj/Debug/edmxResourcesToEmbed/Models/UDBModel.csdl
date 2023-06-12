@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UDBSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carrera">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IdFacultad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Facultad" Relationship="Self.FK_Carreras_Facultades" FromRole="Carreras" ToRole="Facultades" />
+    <Property Name="Visible" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consulta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Correo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdTipoConsulta" Type="Int32" Nullable="false" />
+    <Property Name="TextoConsulta" Type="String" MaxLength="550" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TipoConsulta" Relationship="Self.FK_Consultas_TipoConsultas" FromRole="Consultas" ToRole="TipoConsultas" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Facultad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Carreras" Relationship="Self.FK_Carreras_Facultades" FromRole="Facultades" ToRole="Carreras" />
+    <Property Name="Visible" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Institucion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="URLVideo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Visible" Type="Boolean" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TipoConsulta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Visible" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Consultas" Relationship="Self.FK_Consultas_TipoConsultas" FromRole="TipoConsultas" ToRole="Consultas" />
+  </EntityType>
+  <Association Name="FK_Carreras_Facultades">
+    <End Role="Facultades" Type="UDBSiteModel.Facultad" Multiplicity="1" />
+    <End Role="Carreras" Type="Self.Carrera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facultades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carreras">
+        <PropertyRef Name="IdFacultad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultas_TipoConsultas">
+    <End Role="TipoConsultas" Type="Self.TipoConsulta" Multiplicity="1" />
+    <End Role="Consultas" Type="Self.Consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoConsultas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Consultas">
+        <PropertyRef Name="IdTipoConsulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UDBSiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carreras" EntityType="Self.Carrera" />
+    <EntitySet Name="Consultas" EntityType="Self.Consulta" />
+    <EntitySet Name="Facultades" EntityType="UDBSiteModel.Facultad" />
+    <EntitySet Name="Instituciones" EntityType="Self.Institucion" />
+    <EntitySet Name="Noticias" EntityType="Self.Noticia" />
+    <EntitySet Name="TipoConsultas" EntityType="Self.TipoConsulta" />
+    <AssociationSet Name="FK_Carreras_Facultades" Association="Self.FK_Carreras_Facultades">
+      <End Role="Facultades" EntitySet="Facultades" />
+      <End Role="Carreras" EntitySet="Carreras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultas_TipoConsultas" Association="Self.FK_Consultas_TipoConsultas">
+      <End Role="TipoConsultas" EntitySet="TipoConsultas" />
+      <End Role="Consultas" EntitySet="Consultas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,12 @@
+﻿@model UDBSite.Models.Facultad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@Html.Partial("_details")
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-primary"})
+    @Html.ActionLink("Regresar", "Index",null,new {@class="btn btn-default"})
+</p>

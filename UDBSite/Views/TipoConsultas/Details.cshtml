@@ -1,0 +1,13 @@
+﻿@model UDBSite.Models.TipoConsulta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+@Html.Partial("_details")
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default" })
+</p>
